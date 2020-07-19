@@ -1,0 +1,2 @@
+defmodule Catraca do
+end
