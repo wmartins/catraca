@@ -27,9 +27,15 @@ defmodule Catraca.Comparison do
     left == right
   end
 
+  def compare(nil, :gt, _right), do: false
+  def compare(_left, :gt, nil), do: false
+
   def compare(left, :gt, right) do
     left > right
   end
+
+  def compare(nil, :lt, _right), do: false
+  def compare(_left, :lt, nil), do: false
 
   def compare(left, :lt, right) do
     left < right

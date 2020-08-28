@@ -1,0 +1,2 @@
+defmodule CatracaAPI do
+end

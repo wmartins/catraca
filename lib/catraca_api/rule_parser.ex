@@ -29,7 +29,7 @@ defmodule CatracaAPI.RuleParser do
   def parse!(%{"property" => property, "condition" => condition, "value" => value}) do
     %Catraca.Rule.Property{
       property: property,
-      condition: String.to_atom(condition),
+      condition: String.to_existing_atom(condition),
       value: value
     }
   end

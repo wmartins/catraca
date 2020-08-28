@@ -17,8 +17,16 @@ defmodule Catraca.ComparisonTest do
       assert Catraca.Comparison.compare(10, :gt, 5)
     end
 
-    test "checks when value is not greather than other" do
+    test "checks when value is not greater than other" do
       refute Catraca.Comparison.compare(5, :gt, 10)
+    end
+
+    test "checks value against nil" do
+      refute Catraca.Comparison.compare(nil, :gt, 5)
+    end
+
+    test "checks nil against value" do
+      refute Catraca.Comparison.compare(5, :gt, nil)
     end
   end
 
@@ -27,8 +35,16 @@ defmodule Catraca.ComparisonTest do
       assert Catraca.Comparison.compare(30, :lt, 50)
     end
 
-    test "checks when value is not greather than other" do
+    test "checks when value is not less than other" do
       refute Catraca.Comparison.compare(50, :lt, 30)
+    end
+
+    test "checks value against nil" do
+      refute Catraca.Comparison.compare(nil, :lt, 5)
+    end
+
+    test "checks nil against value" do
+      refute Catraca.Comparison.compare(5, :lt, nil)
     end
   end
 

@@ -1,4 +1,5 @@
 defmodule Catraca.Rule.And do
+  @derive {Jason.Encoder, only: [:rules]}
   @moduledoc """
   Stores `And` rules. Those rules, when evaluated, will return the value of
   applying Kernel.and for all the rules.

@@ -1,4 +1,5 @@
 defmodule Catraca.Rule.Property do
+  @derive {Jason.Encoder, only: [:property, :condition, :value]}
   @moduledoc """
   Stores property based rules. Those rules are used to match a value from a
   property against a specific value or set of values.

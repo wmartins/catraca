@@ -20,7 +20,9 @@ defmodule Catraca.MixProject do
 
   defp deps do
     [
-      {:jason, "~> 1.2"}
+      {:etso, "~> 0.1.1"},
+      {:jason, "~> 1.2"},
+      {:plug_cowboy, "~> 2.3"}
     ]
   end
 end

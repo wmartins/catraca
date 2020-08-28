@@ -1,4 +1,5 @@
 defmodule Catraca.Rule.Or do
+  @derive {Jason.Encoder, only: [:rules]}
   @moduledoc """
   Stores `Or` rules. Those rules, when evaluated, will return the value of
   applying Kernel.or for all the rules.

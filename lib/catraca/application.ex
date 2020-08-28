@@ -1,10 +1,13 @@
 defmodule Catraca.Application do
   @moduledoc false
-
   use Application
 
-  def start(_type, _args) do
-    children = []
+  @impl true
+  def start(_, _) do
+    children = [
+      Catraca.Repo,
+      {Plug.Cowboy, scheme: :http, plug: CatracaAPI.Router, options: [port: 4001]}
+    ]
 
     opts = [strategy: :one_for_one, name: Catraca.Supervisor]
     Supervisor.start_link(children, opts)
