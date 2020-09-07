@@ -15,8 +15,7 @@ end
 
 defmodule CatracaAPI.Router do
   @on_load :ensure_comparison_atoms_loaded
-  use Plug.Router
-  use Plug.ErrorHandler
+  use CatracaAPI, :router
 
   alias Catraca.{Feature, Repo}
   alias CatracaAPI.RuleParser
@@ -27,15 +26,8 @@ defmodule CatracaAPI.Router do
     :ok
   end
 
-  plug(:match)
-
-  plug(Plug.Parsers,
-    parsers: [:json],
-    pass: ["application/json"],
-    json_decoder: Jason
-  )
-
-  plug(:dispatch)
+  plug :match
+  plug :dispatch
 
   post "/v1/feature" do
     %{"key" => key, "rule" => rule} = conn.body_params

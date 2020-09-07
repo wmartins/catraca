@@ -6,7 +6,7 @@ defmodule Catraca.Application do
   def start(_, _) do
     children = [
       Catraca.Repo,
-      {Plug.Cowboy, scheme: :http, plug: CatracaAPI.Router, options: [port: 4001]}
+      {Plug.Cowboy, scheme: :http, plug: CatracaAPI.Endpoint, port: 4001}
     ]
 
     opts = [strategy: :one_for_one, name: Catraca.Supervisor]
