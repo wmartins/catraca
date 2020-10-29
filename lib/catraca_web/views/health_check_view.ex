@@ -1,5 +1,5 @@
-defmodule CatracaAPI.HealthCheckView do
-  use CatracaAPI, :view
+defmodule CatracaWeb.HealthCheckView do
+  use CatracaWeb, :view
 
   def render("index.json", _assigns) do
     {:ok, version} = :application.get_key(:catraca, :vsn)

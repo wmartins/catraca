@@ -1,4 +1,4 @@
-defmodule CatracaAPI do
+defmodule CatracaWeb do
   def router do
     quote do
       use Phoenix.Router

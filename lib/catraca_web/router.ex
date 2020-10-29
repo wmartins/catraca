@@ -8,14 +8,14 @@ defimpl Plug.Exception, for: Ecto.InvalidChangesetError do
   def status(_), do: 409
 end
 
-defimpl Plug.Exception, for: CatracaAPI.RuleParser.ParseError do
+defimpl Plug.Exception, for: CatracaWeb.RuleParser.ParseError do
   def actions(_), do: []
   def status(_), do: 422
 end
 
-defmodule CatracaAPI.Router do
+defmodule CatracaWeb.Router do
   @on_load :ensure_comparison_atoms_loaded
-  use CatracaAPI, :router
+  use CatracaWeb, :router
 
   def ensure_comparison_atoms_loaded do
     # https://github.com/elixir-lang/elixir/issues/4832#issuecomment-227099444
@@ -23,9 +23,9 @@ defmodule CatracaAPI.Router do
     :ok
   end
 
-  get("/status", CatracaAPI.HealthCheckController, :status)
+  get("/status", CatracaWeb.HealthCheckController, :status)
 
-  scope "/v1/feature", CatracaAPI do
+  scope "/v1/feature", CatracaWeb do
     post("/", FeatureController, :create)
     put("/", FeatureController, :update)
     post("/:feature/eval", FeatureController, :eval)

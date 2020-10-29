@@ -1,6 +1,6 @@
-defmodule CatracaAPI.RuleParserTest do
+defmodule CatracaWeb.RuleParserTest do
   use ExUnit.Case
-  doctest CatracaAPI.RuleParser
+  doctest CatracaWeb.RuleParser
 
   test "parses property rules" do
     rule = %{
@@ -9,7 +9,7 @@ defmodule CatracaAPI.RuleParserTest do
       "value" => "@email.com"
     }
 
-    parsed = CatracaAPI.RuleParser.parse!(rule)
+    parsed = CatracaWeb.RuleParser.parse!(rule)
 
     expected = %Catraca.Rule.Property{
       property: "person.email",
@@ -31,7 +31,7 @@ defmodule CatracaAPI.RuleParserTest do
       ]
     }
 
-    parsed = CatracaAPI.RuleParser.parse!(rule)
+    parsed = CatracaWeb.RuleParser.parse!(rule)
 
     expected = %Catraca.Rule.And{
       rules: [
@@ -57,7 +57,7 @@ defmodule CatracaAPI.RuleParserTest do
       ]
     }
 
-    parsed = CatracaAPI.RuleParser.parse!(rule)
+    parsed = CatracaWeb.RuleParser.parse!(rule)
 
     expected = %Catraca.Rule.Or{
       rules: [
@@ -97,7 +97,7 @@ defmodule CatracaAPI.RuleParserTest do
       ]
     }
 
-    parsed = CatracaAPI.RuleParser.parse!(rule)
+    parsed = CatracaWeb.RuleParser.parse!(rule)
 
     expected = %Catraca.Rule.Or{
       rules: [
@@ -127,8 +127,8 @@ defmodule CatracaAPI.RuleParserTest do
   end
 
   test "throws error when parsing wrong rules" do
-    assert_raise CatracaAPI.RuleParser.ParseError, fn ->
-      CatracaAPI.RuleParser.parse!(%{"other" => []})
+    assert_raise CatracaWeb.RuleParser.ParseError, fn ->
+      CatracaWeb.RuleParser.parse!(%{"other" => []})
     end
   end
 end

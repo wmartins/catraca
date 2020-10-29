@@ -1,4 +1,4 @@
-defmodule CatracaAPI.Endpoint do
+defmodule CatracaWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :catraca
 
   plug(Plug.Logger)
@@ -9,5 +9,5 @@ defmodule CatracaAPI.Endpoint do
     json_decoder: Jason
   )
 
-  plug(CatracaAPI.Router)
+  plug(CatracaWeb.Router)
 end

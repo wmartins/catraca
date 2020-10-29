@@ -1,3 +1,3 @@
 use Mix.Config
 
-config :catraca, CatracaAPI.Endpoint, debug_errors: true
+config :catraca, CatracaWeb.Endpoint, debug_errors: true

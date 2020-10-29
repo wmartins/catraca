@@ -2,11 +2,11 @@ use Mix.Config
 
 config :catraca, ecto_repos: [Catraca.Repo]
 
-config :catraca, CatracaAPI.Endpoint,
+config :catraca, CatracaWeb.Endpoint,
   server: true,
   http: [port: 4001],
   render_errors: [
-    view: CatracaAPI.ErrorView,
+    view: CatracaWeb.ErrorView,
     accepts: ~w(html),
     layout: false,
     log: :debug

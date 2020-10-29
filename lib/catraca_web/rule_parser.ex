@@ -1,8 +1,8 @@
-defmodule CatracaAPI.RuleParser.ParseError do
+defmodule CatracaWeb.RuleParser.ParseError do
   defexception [:message, :rule]
 end
 
-defmodule CatracaAPI.RuleParser do
+defmodule CatracaWeb.RuleParser do
   @moduledoc """
   This module is responsible to parse a JSON like structure (probably
   received via HTTP) and create rules based on them.
@@ -35,6 +35,6 @@ defmodule CatracaAPI.RuleParser do
   end
 
   def parse!(rule) do
-    raise CatracaAPI.RuleParser.ParseError, message: "Unable to parse", rule: rule
+    raise CatracaWeb.RuleParser.ParseError, message: "Unable to parse", rule: rule
   end
 end

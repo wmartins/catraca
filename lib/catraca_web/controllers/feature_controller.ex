@@ -1,8 +1,8 @@
-defmodule CatracaAPI.FeatureController do
-  use CatracaAPI, :controller
+defmodule CatracaWeb.FeatureController do
+  use CatracaWeb, :controller
 
   alias Catraca.{Feature, Repo}
-  alias CatracaAPI.RuleParser
+  alias CatracaWeb.RuleParser
 
   def create(conn, %{"key" => key, "rule" => rule}) do
     parsed_rule = RuleParser.parse!(rule)
