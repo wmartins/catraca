@@ -17,7 +17,7 @@ defmodule CatracaWeb.FeatureController do
 
     feature = Features.get_feature!(key)
 
-    response = Features.update_feature(feature, %{rule: parsed_rule})
+    response = Features.update_feature!(feature, %{rule: parsed_rule})
 
     render(conn, "update.json", %{response: response})
   end

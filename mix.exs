@@ -6,6 +6,7 @@ defmodule Catraca.MixProject do
       app: :catraca,
       version: "0.1.0",
       elixir: "~> 1.10",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       compilers: [:phoenix] ++ Mix.compilers(),
       deps: deps()
@@ -19,11 +20,15 @@ defmodule Catraca.MixProject do
     ]
   end
 
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
   defp deps do
     [
       {:etso, "~> 0.1.1"},
       {:jason, "~> 1.2"},
       {:phoenix, "~> 1.5"},
+      {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.14"},
       {:plug_cowboy, "~> 2.3"}
     ]
