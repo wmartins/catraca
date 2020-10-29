@@ -1,5 +1,7 @@
 defmodule Catraca.Feature do
   use Ecto.Schema
+  import Ecto.Changeset
+  alias Catraca.{Rule, Feature}
 
   @derive {Jason.Encoder, only: [:key, :rule]}
 
@@ -12,11 +14,11 @@ defmodule Catraca.Feature do
 
   def changeset(feature, params \\ %{}) do
     feature
-    |> Ecto.Changeset.cast(params, [:rule])
-    |> Ecto.Changeset.validate_required([:rule])
+    |> cast(params, [:rule])
+    |> validate_required([:rule])
   end
 
-  def enabled?(%Catraca.Feature{:rule => rule}, payload) do
-    Catraca.Rule.evaluate(rule, payload)
+  def enabled?(%Feature{:rule => rule}, payload) do
+    Rule.evaluate(rule, payload)
   end
 end

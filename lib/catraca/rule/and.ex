@@ -1,5 +1,4 @@
 defmodule Catraca.Rule.And do
-  @derive {Jason.Encoder, only: [:rules]}
   @moduledoc """
   Stores `And` rules. Those rules, when evaluated, will return the value of
   applying Kernel.and for all the rules.
@@ -20,4 +19,10 @@ defmodule Catraca.Rule.And do
       %Catraca.Rule.Or{rules: []}
   """
   defstruct [:rules]
+end
+
+defimpl Jason.Encoder, for: Catraca.Rule.And do
+  def encode(%Catraca.Rule.And{rules: rules}, opts) do
+    Jason.Encode.map(%{and: rules}, opts)
+  end
 end

@@ -1,29 +1,23 @@
 defmodule CatracaWeb.FeatureController do
   use CatracaWeb, :controller
 
-  alias Catraca.{Feature, Repo}
-  alias CatracaWeb.RuleParser
+  alias Catraca.{Feature}
+  alias CatracaWeb.{Features, RuleParser}
 
   def create(conn, %{"key" => key, "rule" => rule}) do
     parsed_rule = RuleParser.parse!(rule)
 
-    response =
-      Repo.insert!(%Feature{
-        key: key,
-        active: true,
-        rule: parsed_rule
-      })
+    response = Features.create_feature(key, %{rule: parsed_rule})
 
     render(conn, "create.json", %{response: response})
   end
 
   def update(conn, %{"key" => key, "rule" => rule}) do
     parsed_rule = RuleParser.parse!(rule)
-    feature = Repo.get!(Feature, key)
 
-    response =
-      Feature.changeset(feature, %{rule: parsed_rule})
-      |> Repo.update!()
+    feature = Features.get_feature!(key)
+
+    response = Features.update_feature(feature, %{rule: parsed_rule})
 
     render(conn, "update.json", %{response: response})
   end
@@ -31,8 +25,7 @@ defmodule CatracaWeb.FeatureController do
   def eval(conn, %{"feature" => feature}) do
     response = %{
       is_active:
-        Feature
-        |> Repo.get(feature)
+        Features.get_feature!(feature)
         |> Feature.enabled?(conn.body_params)
     }
 
