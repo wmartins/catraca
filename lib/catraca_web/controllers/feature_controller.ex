@@ -4,6 +4,10 @@ defmodule CatracaWeb.FeatureController do
   alias Catraca.{Feature}
   alias CatracaWeb.{Features, RuleParser}
 
+  def index(conn, _params) do
+    render(conn, "index.html")
+  end
+
   def create(conn, %{"key" => key, "rule" => rule}) do
     parsed_rule = RuleParser.parse!(rule)
 

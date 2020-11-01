@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catraca</title>
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+</head>
+<body>
+  <main class="container mx-auto">
+    <% if alert = get_flash(@conn, :info) do %>
+      <p class="alert alert--info" role="alert"><%= alert %></p>
+    <% end %>
+    <% if alert = get_flash(@conn, :error) do %>
+      <p class="alert alert--danger" role="alert"><%= alert %></p>
+    <% end %>
+    <%= @inner_content %>
+  </main>
+</body>
+</html>

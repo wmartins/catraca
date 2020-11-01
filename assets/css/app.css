@@ -1,0 +1,64 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components"; 
+@import "tailwindcss/utilities";
+
+h1 {
+  @apply text-5xl font-semibold;
+  @apply mb-4;
+}
+
+h2 {
+  @apply text-3xl align-middle;
+}
+
+body {
+  @apply bg-gray-100;
+  @apply pt-6;
+}
+
+label {
+  @apply block;
+  @apply text-gray-700 text-sm font-bold;
+  @apply mb-2;
+}
+
+input, textarea {
+  @apply shadow appearance-none border;
+  @apply rounded;
+  @apply w-full py-2 px-3 text-gray-700;
+  @apply leading-tight;
+  @apply mb-4;
+
+  &:focus {
+    @apply shadow-outline outline-none;
+  }
+}
+
+button, .btn {
+  @apply bg-purple-600;
+  @apply text-white font-bold;
+  @apply py-2 px-4;
+  @apply border border-purple-700;
+  @apply rounded;
+  @apply inline-block align-middle;
+
+  &:hover {
+    @apply bg-purple-700;
+  }
+}
+
+.turbolinks-progress-bar {
+  @apply bg-purple-600;
+}
+
+.alert {
+  @apply border px-4 py-3 rounded relative;
+
+  &--info {
+    @apply bg-blue-100 border-blue-400 text-blue-700;
+  }
+
+  &--danger {
+    @apply bg-red-100 border-red-400 text-red-700;
+  }
+}

@@ -22,3 +22,8 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 catraca-*.tar
 
+# node_modules
+node_modules/
+
+# Built assets
+/priv/static/

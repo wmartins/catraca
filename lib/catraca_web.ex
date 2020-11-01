@@ -16,7 +16,10 @@ defmodule CatracaWeb do
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/catraca_api/templates"
+        root: "lib/catraca_web/templates"
+
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2]
+      alias CatracaWeb.Router.Helpers, as: Routes
     end
   end
 
