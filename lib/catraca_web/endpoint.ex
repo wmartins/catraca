@@ -14,6 +14,12 @@ defmodule CatracaWeb.Endpoint do
     only: ~w(css js images robots.txt)
   )
 
+  if code_reloading? do
+    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
+    plug Phoenix.LiveReloader
+    plug Phoenix.CodeReloader
+  end
+
   plug(Plug.Logger)
 
   plug(Plug.Parsers,

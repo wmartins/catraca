@@ -6,7 +6,8 @@ defmodule Catraca.Application do
   def start(_, _) do
     children = [
       Catraca.Repo,
-      CatracaWeb.Endpoint
+      CatracaWeb.Endpoint,
+      {Phoenix.PubSub, name: Catraca.PubSub}
     ]
 
     opts = [strategy: :one_for_one, name: Catraca.Supervisor]

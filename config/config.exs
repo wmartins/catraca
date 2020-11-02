@@ -10,7 +10,8 @@ config :catraca, CatracaWeb.Endpoint,
     accepts: ~w(html),
     layout: false,
     log: :debug
-  ]
+  ],
+  pubsub_server: Catraca.PubSub
 
 config :phoenix, :json_library, Jason
 

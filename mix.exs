@@ -30,6 +30,7 @@ defmodule Catraca.MixProject do
       {:phoenix, "~> 1.5"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.14"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:plug_cowboy, "~> 2.3"}
     ]
   end
