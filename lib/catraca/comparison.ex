@@ -50,6 +50,8 @@ defmodule Catraca.Comparison do
   end
 
   def compare(left, :in, right) do
-    MapSet.member?(MapSet.new(right), left)
+    List.wrap(right)
+    |> MapSet.new
+    |> MapSet.member?(left)
   end
 end

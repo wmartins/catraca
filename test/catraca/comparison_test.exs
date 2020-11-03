@@ -74,5 +74,9 @@ defmodule Catraca.ComparisonTest do
     test "checks when a value doesn't include another" do
       refute Catraca.Comparison.compare("D", :in, ["A", "B", "C"])
     end
+
+    test "checks when a value includes another, even though the collection is a single element" do
+      assert Catraca.Comparison.compare("A", :in, "A")
+    end
   end
 end
