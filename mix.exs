@@ -25,7 +25,7 @@ defmodule Catraca.MixProject do
 
   defp deps do
     [
-      {:etso, "~> 0.1.1"},
+      {:etso, "~> 0.1.2"},
       {:jason, "~> 1.2"},
       {:phoenix, "~> 1.5"},
       {:phoenix_ecto, "~> 4.0"},

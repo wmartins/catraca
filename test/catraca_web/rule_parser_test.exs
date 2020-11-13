@@ -126,6 +126,42 @@ defmodule CatracaWeb.RuleParserTest do
     assert parsed == expected
   end
 
+  test "parses string values" do
+    parsed = CatracaWeb.RuleParser.parse!(~s(
+      {
+        "and": [
+          {
+            "property": "email",
+            "condition": "contains",
+            "value": "@company-mail.com"
+          },
+          {
+            "property": "group",
+            "condition": "in",
+            "value": ["employees", "beta"]
+          }
+        ]
+      }
+    ))
+
+    expected = %Catraca.Rule.And{
+      rules: [
+        %Catraca.Rule.Property{
+          property: "email",
+          condition: :contains,
+          value: "@company-mail.com"
+        },
+        %Catraca.Rule.Property{
+          property: "group",
+          condition: :in,
+          value: ["employees", "beta"]
+        }
+      ]
+    }
+
+    assert parsed == expected
+  end
+
   test "throws error when parsing wrong rules" do
     assert_raise CatracaWeb.RuleParser.ParseError, fn ->
       CatracaWeb.RuleParser.parse!(%{"other" => []})

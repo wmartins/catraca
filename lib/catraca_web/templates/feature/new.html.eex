@@ -1,0 +1,17 @@
+<h2>Create a new feature</h2>
+
+<%= form_for @changeset, Routes.feature_path(@conn, :create), fn f -> %>
+  <%= label f, :key, "Key" %>
+  <%= text_input f, :key %>
+  <%= error_tag f, :key %>
+
+  <%= label f, :rule, "Rule" %>
+  <%=
+    textarea f, :rule,
+      rows: 15,
+      value: Jason.encode!(get_field_value(f, :rule), pretty: true)
+  %>
+  <%= error_tag f, :rule %>
+
+  <%= submit "Create" %>
+<% end %>

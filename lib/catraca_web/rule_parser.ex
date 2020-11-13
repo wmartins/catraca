@@ -34,6 +34,10 @@ defmodule CatracaWeb.RuleParser do
     }
   end
 
+  def parse!(rule) when is_bitstring(rule) do
+    parse!(Jason.decode!(rule))
+  end
+
   def parse!(rule) do
     raise CatracaWeb.RuleParser.ParseError, message: "Unable to parse", rule: rule
   end

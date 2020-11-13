@@ -15,15 +15,15 @@ defmodule CatracaWeb.Endpoint do
   )
 
   if code_reloading? do
-    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
-    plug Phoenix.LiveReloader
-    plug Phoenix.CodeReloader
+    socket("/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket)
+    plug(Phoenix.LiveReloader)
+    plug(Phoenix.CodeReloader)
   end
 
   plug(Plug.Logger)
 
   plug(Plug.Parsers,
-    parsers: [:json],
+    parsers: [:json, :multipart, :urlencoded],
     pass: ["application/json"],
     json_decoder: Jason
   )

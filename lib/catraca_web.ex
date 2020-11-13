@@ -10,6 +10,8 @@ defmodule CatracaWeb do
       use Phoenix.Controller
 
       import Plug.Conn
+
+      alias CatracaWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -18,7 +20,11 @@ defmodule CatracaWeb do
       use Phoenix.View,
         root: "lib/catraca_web/templates"
 
-      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2]
+      import Phoenix.Controller, only: [put_flash: 3, get_flash: 1, get_flash: 2]
+      import Phoenix.HTML.Form
+      import CatracaWeb.FormHelpers
+      import CatracaWeb.ErrorHelpers
+
       alias CatracaWeb.Router.Helpers, as: Routes
     end
   end

@@ -5,7 +5,7 @@ defmodule CatracaWeb.ConnCase do
     quote do
       import Plug.Conn
       import Phoenix.ConnTest
-      alias CatracaWeb.Router.Helper, as: Routes
+      alias CatracaWeb.Router.Helpers, as: Routes
 
       @endpoint CatracaWeb.Endpoint
     end

@@ -31,6 +31,8 @@ defmodule CatracaWeb.Router do
   scope "/", CatracaWeb do
     pipe_through(:browser)
     get("/", FeatureController, :index)
+    get("/new", FeatureController, :new)
+    post("/create", FeatureController, :create)
   end
 
   scope "/v1/feature", CatracaWeb do

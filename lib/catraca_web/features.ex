@@ -14,7 +14,7 @@ defmodule CatracaWeb.Features do
       rule: []
     }
     |> Catraca.Feature.changeset(attrs)
-    |> Catraca.Repo.insert!()
+    |> Catraca.Repo.insert()
   end
 
   def update_feature!(%Catraca.Feature{} = feature, attrs) do

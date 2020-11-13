@@ -1,5 +1,6 @@
 defmodule CatracaWeb.FeatureControllerTest do
   use CatracaWeb.ConnCase
+  import CatracaWeb.Seed
   alias Catraca.Rule.{And, Or, Property}
 
   @valid_attrs %{
@@ -29,8 +30,8 @@ defmodule CatracaWeb.FeatureControllerTest do
   }
 
   test "POST /eval", %{conn: conn} do
-    CatracaWeb.Features.create_feature("feature.v1", @valid_attrs)
-    key = "feature.v1"
+    key = gen_feature_key()
+    CatracaWeb.Features.create_feature(key, @valid_attrs)
 
     conn =
       post(conn, "/v1/feature/#{key}/eval", %{
@@ -47,9 +48,11 @@ defmodule CatracaWeb.FeatureControllerTest do
   end
 
   test "POST /", %{conn: conn} do
+    key = gen_feature_key()
+
     conn =
       post(conn, "/v1/feature", %{
-        key: "feature.v2",
+        key: key,
         rule: %{
           property: "customer.email",
           condition: "contains",
@@ -59,15 +62,35 @@ defmodule CatracaWeb.FeatureControllerTest do
 
     body = json_response(conn, 200)
 
-    assert body["key"] == "feature.v2"
+    assert body["key"] == key
+  end
+
+  test "POST /create", %{conn: conn} do
+    key = gen_feature_key()
+
+    conn =
+      post(conn, Routes.feature_path(conn, :create), %{
+        feature: %{
+          key: key,
+          rule: %{
+            property: "customer.email",
+            condition: "contains",
+            value: "@company-mail.com"
+          }
+        }
+      })
+
+    assert redirected_to(conn) == Routes.feature_path(conn, :index)
   end
 
   test "PUT /", %{conn: conn} do
-    CatracaWeb.Features.create_feature("feature.v3", @valid_attrs)
+    key = gen_feature_key()
+
+    CatracaWeb.Features.create_feature(key, @valid_attrs)
 
     conn =
       put(conn, "/v1/feature", %{
-        key: "feature.v3",
+        key: key,
         rule: %{
           property: "updated.property",
           condition: "gt",

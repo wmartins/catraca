@@ -9,11 +9,11 @@
 </head>
 <body>
   <main class="container mx-auto">
-    <% if alert = get_flash(@conn, :info) do %>
-      <p class="alert alert--info" role="alert"><%= alert %></p>
+    <%= if get_flash(@conn, :info) do %>
+      <p class="alert alert--info" role="alert"><%= get_flash(@conn, :info) %></p>
     <% end %>
-    <% if alert = get_flash(@conn, :error) do %>
-      <p class="alert alert--danger" role="alert"><%= alert %></p>
+    <%= if get_flash(@conn, :error) do %>
+      <p class="alert alert--danger" role="alert"><%= get_flash(@conn, :error) %></p>
     <% end %>
     <%= @inner_content %>
   </main>

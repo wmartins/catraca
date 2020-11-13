@@ -1,5 +1,6 @@
 defmodule CatracaWeb.FeaturesTest do
   use ExUnit.Case
+  import CatracaWeb.Seed
   alias Catraca.Rule.Property
 
   @valid_attrs %{
@@ -11,19 +12,20 @@ defmodule CatracaWeb.FeaturesTest do
   }
 
   test "list_features/0 returns all features" do
-    feature = CatracaWeb.Seed.feature_fixture("features.test.v1", @valid_attrs)
+    {:ok, feature} = feature_fixture(gen_feature_key(), @valid_attrs)
 
     assert Enum.member?(CatracaWeb.Features.list_features(), feature)
   end
 
   test "get_feature!/1 returns feature by given key" do
-    feature = CatracaWeb.Seed.feature_fixture("features.test.v2", @valid_attrs)
+    key = gen_feature_key()
+    {:ok, feature} = feature_fixture(key, @valid_attrs)
 
-    assert CatracaWeb.Features.get_feature!("features.test.v2") == feature
+    assert CatracaWeb.Features.get_feature!(key) == feature
   end
 
   test "update_feature!/1 updates feature" do
-    feature = CatracaWeb.Seed.feature_fixture("features.test.v3", @valid_attrs)
+    {:ok, feature} = feature_fixture(gen_feature_key(), @valid_attrs)
 
     updated =
       CatracaWeb.Features.update_feature!(feature, %{
