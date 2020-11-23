@@ -1,6 +1,7 @@
 defmodule CatracaWeb.FeatureControllerTest do
   use CatracaWeb.ConnCase
   import CatracaWeb.Seed
+  import Phoenix.HTML
   alias Catraca.Rule.{And, Or, Property}
 
   @valid_attrs %{
@@ -105,10 +106,10 @@ defmodule CatracaWeb.FeatureControllerTest do
     feature = CatracaWeb.Features.get_feature!(key)
 
     assert feature.rule == %Catraca.Rule.Property{
-      property: "updated.property",
-      condition: :gt,
-      value: 30
-    }
+             property: "updated.property",
+             condition: :gt,
+             value: 30
+           }
   end
 
   test "PUT /v1/feature/:key", %{conn: conn} do
@@ -153,5 +154,32 @@ defmodule CatracaWeb.FeatureControllerTest do
     conn = get(conn, "/edit/#{key}")
 
     assert html_response(conn, 200) =~ key
+  end
+
+  test "GET /eval/:key", %{conn: conn} do
+    key = gen_feature_key()
+
+    CatracaWeb.Features.create_feature(key, @valid_attrs)
+
+    conn = get(conn, "/eval/#{key}")
+
+    assert html_response(conn, 200) =~ key
+  end
+
+  test "POST /eva/:key", %{conn: conn} do
+    key = gen_feature_key()
+
+    CatracaWeb.Features.create_feature(key, @valid_attrs)
+
+    conn =
+      post(conn, "/eval/#{key}", %{
+        payload:
+          Jason.encode!(%{
+            email: "user@company-mail.com"
+          })
+      })
+
+    assert html_response(conn, 200) =~ "Evaluation result:"
+    assert html_response(conn, 200) =~ ~s({ "is_active": true }) |> safe_to_string |> html_escape
   end
 end

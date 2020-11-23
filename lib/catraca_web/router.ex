@@ -37,6 +37,9 @@ defmodule CatracaWeb.Router do
 
     get("/edit/:key", FeatureController, :edit)
     put("/update/:key", FeatureController, :update)
+
+    get("/eval/:key", FeatureController, :eval)
+    post("/eval/:key", FeatureController, :eval)
   end
 
   scope "/v1/feature", CatracaWeb do

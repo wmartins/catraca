@@ -18,6 +18,7 @@ defmodule CatracaWeb do
   def view do
     quote do
       use Phoenix.HTML
+
       use Phoenix.View,
         root: "lib/catraca_web/templates"
 

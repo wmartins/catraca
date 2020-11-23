@@ -23,6 +23,12 @@
           to: Routes.feature_path(@conn, :edit, feature.key),
           class: "btn btn--inverse mr-4"
       %>
+
+      <%=
+        link "Evaluate",
+          to: Routes.feature_path(@conn, :eval, feature.key),
+          class: "btn btn--inverse"
+      %>
     </article>
   <% end %>
 </div>

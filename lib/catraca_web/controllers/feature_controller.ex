@@ -90,6 +90,29 @@ defmodule CatracaWeb.FeatureController do
     end
   end
 
+  def eval(conn, %{"key" => key, "payload" => raw_payload}) do
+    feature = Features.get_feature!(key)
+    payload = Jason.decode!(raw_payload)
+
+    response = %{
+      is_active: Feature.enabled?(feature, payload)
+    }
+
+    conn
+    |> assign(:payload, payload)
+    |> render("eval.html", %{
+      feature: feature,
+      payload: payload,
+      response: response
+    })
+  end
+
+  def eval(conn, %{"key" => key}) do
+    feature = Features.get_feature!(key)
+
+    render(conn, "eval.html", %{feature: feature, payload: %{email: "user@company-mail.com"}})
+  end
+
   def eval(conn, %{"feature" => feature}) do
     response = %{
       is_active:
