@@ -31,13 +31,17 @@ defmodule CatracaWeb.Router do
   scope "/", CatracaWeb do
     pipe_through(:browser)
     get("/", FeatureController, :index)
+
     get("/new", FeatureController, :new)
     post("/create", FeatureController, :create)
+
+    get("/edit/:key", FeatureController, :edit)
+    put("/update/:key", FeatureController, :update)
   end
 
   scope "/v1/feature", CatracaWeb do
     post("/", FeatureController, :create)
-    put("/", FeatureController, :update)
+    put("/:key", FeatureController, :update)
     post("/:feature/eval", FeatureController, :eval)
   end
 end

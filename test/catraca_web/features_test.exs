@@ -27,8 +27,8 @@ defmodule CatracaWeb.FeaturesTest do
   test "update_feature!/1 updates feature" do
     {:ok, feature} = feature_fixture(gen_feature_key(), @valid_attrs)
 
-    updated =
-      CatracaWeb.Features.update_feature!(feature, %{
+    {:ok, updated} =
+      CatracaWeb.Features.update_feature(feature, %{
         rule: %Property{
           property: "customer.alternate_email",
           condition: :contains,

@@ -11,6 +11,10 @@ h2 {
   @apply text-3xl align-middle;
 }
 
+h3 {
+  @apply text-2xl;
+}
+
 body {
   @apply bg-gray-200;
   @apply pt-6;
@@ -34,6 +38,18 @@ input, textarea {
   }
 }
 
+.feature-card {
+  @apply bg-white;
+  @apply mt-3;
+  @apply p-3;
+  @apply border border-purple-700;
+  @apply transition;
+  @apply duration-200;
+  @apply rounded;
+  @apply shadow;
+  @apply text-center;
+}
+
 [data-phx-error-for] {
   @apply block;
   @apply mb-4;
@@ -47,9 +63,20 @@ button, .btn {
   @apply border border-purple-700;
   @apply rounded;
   @apply inline-block align-middle;
+  @apply transition;
+  @apply duration-200;
 
   &:hover {
     @apply bg-purple-700;
+  }
+
+  &--inverse {
+    @apply bg-gray-200;
+    @apply text-purple-600;
+
+    &:hover {
+      @apply text-gray-200;
+    }
   }
 }
 

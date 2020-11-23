@@ -30,5 +30,7 @@ defmodule CatracaWeb.Endpoint do
 
   plug(Plug.Session, @session_options)
 
+  plug(Plug.MethodOverride)
+
   plug(CatracaWeb.Router)
 end

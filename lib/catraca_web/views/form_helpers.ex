@@ -4,4 +4,8 @@ defmodule CatracaWeb.FormHelpers do
 
     value
   end
+
+  def is_editing(form) do
+    Ecto.get_meta(form.data, :state) == :loaded
+  end
 end

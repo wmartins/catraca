@@ -3,3 +3,26 @@
 <p>
   Welcome to Catraca, your feature flag system.
 </p>
+
+<%=
+  link "Create new feature",
+    to: Routes.feature_path(@conn, :new),
+    class: "btn mt-3"
+%>
+
+<%= if @features != [] do %>
+  <h3 class="mt-16">Available features:</h3>
+<% end %>
+
+<div class="md:grid grid-cols-3 gap-6">
+  <%= for feature <- @features do %>
+    <article class="feature-card">
+      <h1 class="text-2xl truncate"><%= feature.key %></h1>
+      <%=
+        link "Edit",
+          to: Routes.feature_path(@conn, :edit, feature.key),
+          class: "btn btn--inverse mr-4"
+      %>
+    </article>
+  <% end %>
+</div>

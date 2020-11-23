@@ -83,13 +83,41 @@ defmodule CatracaWeb.FeatureControllerTest do
     assert redirected_to(conn) == Routes.feature_path(conn, :index)
   end
 
-  test "PUT /", %{conn: conn} do
+  test "PUT /update/:key", %{conn: conn} do
     key = gen_feature_key()
 
     CatracaWeb.Features.create_feature(key, @valid_attrs)
 
     conn =
-      put(conn, "/v1/feature", %{
+      put(conn, "/update/#{key}", %{
+        key: key,
+        feature: %{
+          rule: %{
+            property: "updated.property",
+            condition: "gt",
+            value: 30
+          }
+        }
+      })
+
+    assert redirected_to(conn) == Routes.feature_path(conn, :index)
+
+    feature = CatracaWeb.Features.get_feature!(key)
+
+    assert feature.rule == %Catraca.Rule.Property{
+      property: "updated.property",
+      condition: :gt,
+      value: 30
+    }
+  end
+
+  test "PUT /v1/feature/:key", %{conn: conn} do
+    key = gen_feature_key()
+
+    CatracaWeb.Features.create_feature(key, @valid_attrs)
+
+    conn =
+      put(conn, "/v1/feature/#{key}", %{
         key: key,
         rule: %{
           property: "updated.property",
@@ -105,5 +133,25 @@ defmodule CatracaWeb.FeatureControllerTest do
              "condition" => "gt",
              "value" => 30
            }
+  end
+
+  test "GET /", %{conn: conn} do
+    key = gen_feature_key()
+
+    CatracaWeb.Features.create_feature(key, @valid_attrs)
+
+    conn = get(conn, "/")
+
+    assert html_response(conn, 200) =~ key
+  end
+
+  test "GET /edit/:key", %{conn: conn} do
+    key = gen_feature_key()
+
+    CatracaWeb.Features.create_feature(key, @valid_attrs)
+
+    conn = get(conn, "/edit/#{key}")
+
+    assert html_response(conn, 200) =~ key
   end
 end

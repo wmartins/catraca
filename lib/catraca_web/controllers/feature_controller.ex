@@ -5,7 +5,9 @@ defmodule CatracaWeb.FeatureController do
   alias CatracaWeb.{Features, RuleParser}
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    features = Features.list_features()
+
+    render(conn, "index.html", %{features: features})
   end
 
   def new(conn, _params) do
@@ -51,14 +53,41 @@ defmodule CatracaWeb.FeatureController do
     end
   end
 
-  def update(conn, %{"key" => key, "rule" => rule}) do
-    parsed_rule = RuleParser.parse!(rule)
+  def edit(conn, %{"key" => key}) do
+    feature = Features.get_feature!(key)
+    changeset = Feature.changeset(feature)
 
+    render(conn, "edit.html", feature: feature, changeset: changeset)
+  end
+
+  def update(conn, %{"feature" => %{"rule" => rule}, "key" => key}) do
+    parsed_rule = RuleParser.parse!(rule)
     feature = Features.get_feature!(key)
 
-    response = Features.update_feature!(feature, %{rule: parsed_rule})
+    case Features.update_feature(feature, %{rule: parsed_rule}) do
+      {:ok, feature} ->
+        conn
+        |> put_flash(:info, "Feature #{feature.key} updated")
+        |> redirect(to: Routes.feature_path(conn, :index))
 
-    render(conn, "update.json", %{response: response})
+      {:error, changeset} ->
+        conn
+        |> put_flash(
+          :error,
+          "An error occured while updating the feature, review the fields and try again"
+        )
+        |> render("edit.html", %{changeset: changeset})
+    end
+  end
+
+  def update(conn, %{"key" => key, "rule" => rule}) do
+    parsed_rule = RuleParser.parse!(rule)
+    feature = Features.get_feature!(key)
+
+    case Features.update_feature(feature, %{rule: parsed_rule}) do
+      {:ok, response} -> render(conn, "update.json", %{response: response})
+      {:error, changeset} -> render(conn, "error.json", %{changeset: changeset})
+    end
   end
 
   def eval(conn, %{"feature" => feature}) do
