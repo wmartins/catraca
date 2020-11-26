@@ -1,0 +1,17 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if not is_editing f do %>
+    <%= label f, :key, "Key" %>
+    <%= text_input f, :key %>
+    <%= error_tag f, :key %>
+  <% end %>
+
+  <%= label f, :rule, "Rule" %>
+  <%=
+    textarea f, :rule,
+      rows: 15,
+      value: Jason.encode!(get_field_value(f, :rule), pretty: true)
+  %>
+  <%= error_tag f, :rule %>
+
+  <%= submit "Save" %>
+<% end %>

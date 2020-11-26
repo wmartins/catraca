@@ -1,0 +1,19 @@
+<h2>Evaluating feature <%= @feature.key %></h2>
+
+<%= form_for @conn, Routes.feature_path(@conn, :eval, @feature), fn f -> %>
+  <%= label f, :payload, "Rule" %>
+  <%=
+    textarea f, :payload,
+      rows: 15,
+      value: Jason.encode!(get_field_value(f, :payload, @payload), pretty: true)
+  %>
+
+  <%= submit "Evaluate!" %>
+<% end %>
+
+<%= if assigns[:response] do %>
+<h3 class="mt-3 mb-3">Evaluation result: </h3>
+<code>
+  <%= Jason.encode!(@response, pretty: true) %>
+</code>
+<% end %>

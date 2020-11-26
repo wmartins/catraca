@@ -9,7 +9,7 @@ config :catraca, CatracaWeb.Endpoint,
   render_errors: [
     view: CatracaWeb.ErrorView,
     accepts: ~w(html),
-    layout: false,
+    layout: "app.html",
     log: :debug
   ],
   pubsub_server: Catraca.PubSub
